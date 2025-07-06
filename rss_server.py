@@ -21,21 +21,21 @@ def rss_feed():
     response = requests.get(url, params=params)
     data = response.json()
 
-    # Génération du flux RSS
+    # Generation du flux RSS
     fg = FeedGenerator()
-    fg.title("Offres Adzuna – BTS Electrotechnique en Charente-Maritime")
+    fg.title("Offres Adzuna â€“ BTS Electrotechnique en Charente-Maritime")
     fg.link(href="https://www.adzuna.fr")
-    fg.description("Flux RSS basé sur l'API Adzuna")
+    fg.description("Flux RSS basÃ© sur l'API Adzuna")
 
     for job in data["results"]:
         fe = fg.add_entry()
         fe.title(job["title"])
         fe.link(href=job["redirect_url"])
-        fe.description(job.get("description", "")[:300] + "…")
+        fe.description(job.get("description", "")[:300] + "â€¦")
 
     rss_xml = fg.rss_str(pretty=True)
 
-    # Retourner la réponse HTTP avec le bon content-type
+    # Retourner la reponse HTTP avec le bon content-type
     return Response(rss_xml, mimetype='application/rss+xml')
 
 if __name__ == "__main__":
