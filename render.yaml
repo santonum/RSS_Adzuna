@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: rss-flux-adzuna
+    env: python
+    buildCommand: ""
+    startCommand: "python rss_server.py"
+    plan: free
